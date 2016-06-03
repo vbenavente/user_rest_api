@@ -14,7 +14,7 @@ router.post('/signup', jsonParser, (req, res, next) => {
   newUser.password = hashedPassword;
   req.body.password = null;
   User.findOne({username: req.body.username}, (err, user) => {
-    if (err || user) return next(new Error('couldn not create user - one already exists or error'));
+    if (err || user) return next(new Error('could not create user - one already exists or error'));
     newUser.save((err, user) => {
       if(err) return next(new Error('could not create user'));
       res.json({token: user.generateToken()});
